@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/header}"/>
+</head>
+
+<body>
+<div class="container">
+    <th:block th:include="~{fragments/nav}"/>
+    <div class="container mt-lg-5 border-right border-bottom bg-transparent h-100">
+        <h1 class="w-100 text-light text-right">Register</h1>
+    </div>
+    <div class="row tm-mt-big">
+        <div class="col-12 mx-auto tm-login-col">
+            <div class="bg-white tm-block">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <form th:action="@{/users/register}"
+                              th:object="${userRegisterBindingModel}"
+                              method="POST"
+                              class="tm-login-form">
+                            <div class="input-group">
+                                <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
+                                <input name="username" type="text"
+                                       class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                       id="username" th:field="*{username}"
+                                       th:errorclass="bg-danger" placeholder="Enter username">
+                                <div class="mx-auto">
+                                    <small th:if="${#fields.hasErrors('username')}"
+                                           th:errors="*{username}" class="text-danger">The username must be at least 2
+                                        characters long</small>
+                                </div>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
+                                <input name="password" type="password" class="form-control validate"
+                                       th:field="*{password}" th:errorclass="bg-danger"
+                                       id="password" placeholder="Enter password">
+                                <div class="mx-auto">
+                                    <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                           class="text-danger">The password must be at least 3 characters long</small>
+                                </div>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="confirmPassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label"
+                                >Confirm Password</label>
+                                <input name="confirmPassword" type="password" class="form-control validate"
+                                       th:field="*{confirmPassword}" th:errorclass="bg-danger"
+                                       id="confirmPassword" placeholder="Confirm password">
+
+                                <div class="mx-auto">
+                                    <small th:if="${passwordDiff}" th:value="${passwordDiffMessage}"
+                                           class="text-danger">The password must be at least 3 characters long</small>
+                                </div>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="email"
+                                       class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Email</label>
+                                <input name="email" type="email" class="form-control validate" id="email"
+                                       th:field="*{email}" th:errorclass="bg-danger"
+                                       placeholder="Enter email">
+
+                            </div>
+                            <div class="mx-auto text-center">
+                                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Enter
+                                    valid email address</small>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
+                                <input name="git" type="text" class="form-control validate" id="git"
+                                       th:field="*{githubAddress}" th:errorclass="bg-danger"
+                                       placeholder="Enter git">
+
+                            </div>
+                            <div class="mx-auto text-center align-content-center">
+                                <small th:if="${#fields.hasErrors('githubAddress')}" th:errors="*{githubAddress}"
+                                       class="text-danger">Enter git address following this pattern </small>
+                            </div>
+                            <div class="input-group mt-3">
+                                <button type="submit" class="btn btn-primary d-inline-block mx-auto">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer class="row">
+    <th:block th:include="~{fragments/footer}"/>
+</footer>
+</body>
+
+</html>
